@@ -1,0 +1,9 @@
+body{
+    background-color: orange;
+}
+/*Centering the burger image*/
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-6">
+        <h4 class="green_font">Burgers are ready to be eat</h4>
+        {{#each burgers }}
+        {{/each}}
+        <form action="burger/get/{{id}}" method="post">
+            <div class="input-group">
+                <li class="form-control">{{id}}.{{this.burgers}}</li>
+                <span class="input-group-btn"></span>
+                <button class="btn btn-success devour-button" type="submit">Devour it</button>
+            </div>
+        </form>
+    </div>
+
+</div>
