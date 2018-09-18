@@ -1,23 +1,24 @@
 var orm = require('../config/orm.js');
 
 
+// create the code that will call the ORM functions using burger specific input for the ORM.
 var burger = {
 
-    selectAll: function (tableInput, callback) {
-        orm.selectAll(tableInput,function (res) {
-            callback(res);
+    selectAll: function (tableInput, cb) {
+        orm.selectAll("burgers",function (res) {
+            cb(res);
         });
     },
 
-    insertOne: function (burger_name, callback) {
-        orm.insertOne(burger_name, function (res) {
-            callback(res);
+    insertOne: function (val1,cb) {
+        orm.insertOne("burgers", "burgers_name", "devoured", val1, false, function (res) {
+            cb(res);
         });
     },
 
-    updateOne: function (burger_id, callback) {
-        orm.updateOne(burger_id, function (res) {
-            callback(res);
+    updateOne: function (value, condi, cb) {
+        orm.updateOne("burgers", "devoured", value, condi, function (res) {
+            cb(res);
         });
     }
 

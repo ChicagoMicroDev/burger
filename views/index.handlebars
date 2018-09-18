@@ -2,14 +2,59 @@
     <div class="col-md-6">
         <h4 class="green_font">Burgers are ready to be eat</h4>
         {{#each burgers }}
+            {{#unless devoured}}
+                <p>
+                    {{this.id}} {{this.burgers_name}}
+                    <button data-status="0" class="hungry" data-id="{{this.id}}"> Devour it</button>
+                </p>
+            {{/unless}}
         {{/each}}
-        <form action="burger/get/{{id}}" method="post">
-            <div class="input-group">
-                <li class="form-control">{{id}}.{{this.burgers}}</li>
-                <span class="input-group-btn"></span>
-                <button class="btn btn-success devour-button" type="submit">Devour it</button>
-            </div>
-        </form>
+        <!--<form action="burger/post" method="POST">-->
+        <!--<div class="input-group">-->
+        <!--<li class="form-control">{{burger_name}}</li>-->
+        <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-success " type="submit">Devour it</button>-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--</form>-->
+
     </div>
+    <div class="col-md-6">
+        <h4 class="green_font">This shit has been eaten</h4>
+        {{#each burgers }}
+            {{#if devoured}}
+                <p>
+                    {{this.id}} {{this.burgers_name}}
+                    <button data-status="1" class="hungry" data-id="{{this.id}}"> Devour it</button>
+                </p>
+            {{/if}}
+        {{/each}}
+
+    </div>
+    <form action="/burgers/post" method="POST">
+        <div class="input-group">
+
+            <input type="text" name="info" class="input-group-btn">
+            <input type="submit" value="submit" class="btn btn-success ">
+
+        </div>
+    </form>
 
 </div>
+
+<!--<script type="text/javascript">-->
+<!--console.log("hey");-->
+    <!--$(document).ready(function () {-->
+        <!--$(".hungry").on("click", function () {-->
+            <!--console.log("Ive been click", this);-->
+            <!--var status = $(this).data("status");-->
+            <!--var id = $(this).data("id");-->
+            <!--$.ajax({-->
+                <!--url: "/burgers/" + id + "/" + status,-->
+                <!--method: "GET", data: {id: id, status: status}-->
+            <!--}).then(function () {-->
+                <!--location.reload()-->
+            <!--})-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->

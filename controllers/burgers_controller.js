@@ -1,32 +1,40 @@
 var express = require('express');
 var burger = require("../models/burger.js");
-
 var router = express.Router();
 
-router.get('/' , function (req, res) {
-    res.redirect('/index');
-});
-router.get('/index' , function (req, res) {
+
+router.get('/', function (req, res) {
     burger.selectAll("burgers", function (data) {
-        console.log(data);
-        res.render("index",{
+        res.render("index", {
             burgers: data
         })
 
     });
 });
 
-router.post('/burger/eat/create', function (req,res) {
-    burger.insertOne(req.params.burgers_name,function () {
-        res.redirect('/index');
+router.post('/burgers/post', function (req, res) {
+    console.log(req.body);
+    burger.insertOne(req.body.info, function () {
+        res.redirect('/');
     })
 });
 
-router.post('/burgers/eat/:id',function (req,res) {
-    burger.updateOne(req.params.id, function () {
-        res.redirect('/index');
+router.get('/burgers/:id/:status', function (req, res) {
+    var newValue;
+    if (req.params.status === "0") {
+        newValue = 1;
+        burger.updateOne(newValue, req.params.id, function (data) {
+            res.redirect("/");
+        })
+    } else if (req.params.status === "1") {
+        newValue = 0;
+        burger.updateOne(newValue, req.params.id, function (data) {
+            res.redirect("/");
+        })
+    }
 
-    })
-
+    console.log("Hi im paul");
+    console.log(req.params.status);
+    console.log(newValue, "hi paul");
 });
 module.exports = router;
